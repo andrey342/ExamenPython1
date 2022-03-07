@@ -8,12 +8,21 @@ def encontrar_menores(diccionario,letra):
     Returns:
       resultado: ej. ['AUNQUE','ABINAR']
     """
+
+    # 1. el error se debe a que resultado = [] estaba dentro del bucle y del if , por lo que cada vez que comprobaba una letra menor que "b" por ejemplo
+    # se guardaba en la lista pero la sigueinte comprobacion de la letra se vacia otra vez, por lo tanto se iba vaciando con cada loop.
+    # 2. la solucion ha sido sacarlo fuera del for general para que no se vacie cada vez que encuentre una letra anterior a la que nos han dado
+
+    resultado=[]
     for clave in diccionario:
-        print(clave)
+        
         for palabra in diccionario[clave]:
+            
             if palabra[0] < letra:
-                resultado=[]
+                # se ha quitado esta linea
+                #resultado=[]
                 resultado.append(palabra)
+    
     return resultado
 
 def add_client(clients_list,nif,name,address,phone,email):
@@ -33,6 +42,18 @@ def add_client(clients_list,nif,name,address,phone,email):
               'email': email
         }
     }
+
+    print(clients_list)
+
+clients_list = {'45333152F':
+                {'name':'Martina',
+                 'address':'Calle Mislata, 32',
+                 'phone':'+34636961236',
+                 'email':'la_martina@gmail.com'}
+}
+add_client(clients_list,'12343555F','Jacinto','Moraira','+34616124513','jacin@gmail.com')
+add_client(clients_list,'20555415M','Jaume','Gandia','+34652226215','soc_choume@gmail.com')
+
 
 def repartir_cartas(cartas_iniciales,repeticiones):
     """Dada una baraja de cartas iniciales y un número de repeticiones, esta función selecciona 5 cartas aleatorias de esta baraja y las mete en un diccionario llamado combinaciones. El proceso se repite tantas veces como repeticiones se indiquen.
