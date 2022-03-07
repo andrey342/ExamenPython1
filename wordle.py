@@ -66,18 +66,23 @@ def print_word(word , same_letter_position , same_letter):
       transformed: La palabra aplicando las transformaciones. En el caso anterior: "Cam--"
     """
 
-    transformed = word
+    transformed = ""
 
     for a in range(len(word)):
         transformed += "-"
+    
+    lista = list(transformed)
 
     for i in same_letter_position:
-        transformed = word[i].upper()
-    for j in same_letter:
-        transformed = word[j].lower()
-    
-    print(transformed)
+        lista[i] = word[i].upper()
 
+    for j in same_letter:
+        lista[j] += word[j].lower()
+    
+    transformed = ''.join(lista)
+    
+
+    return transformed
 
 
     
