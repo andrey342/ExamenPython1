@@ -35,24 +35,16 @@ def add_client(clients_list,nif,name,address,phone,email):
       phone
       email
     """
+    # 1. el error se debe a que dentro del diccioanrio le declarabamos otro , nif : {}... entonces tenemos uno dentro de otro
+    # se ha quitado la declaracion del que esta dentro del diccionario ya que el primer diccionario ya tiene el nif del cliente , no hace falta hacerle otro dentro
+    # 2. se ha solucionado quitando la declaracion del que esta dentro nif: {} 
     clients_list[nif] = {
-        nif: {'name': name,
-              'address': address,
-              'phone': phone,
-              'email': email
-        }
+        'name': name,
+        'address': address,
+        'phone': phone,
+        'email': email
+        
     }
-
-    print(clients_list)
-
-clients_list = {'45333152F':
-                {'name':'Martina',
-                 'address':'Calle Mislata, 32',
-                 'phone':'+34636961236',
-                 'email':'la_martina@gmail.com'}
-}
-add_client(clients_list,'12343555F','Jacinto','Moraira','+34616124513','jacin@gmail.com')
-add_client(clients_list,'20555415M','Jaume','Gandia','+34652226215','soc_choume@gmail.com')
 
 
 def repartir_cartas(cartas_iniciales,repeticiones):
@@ -63,15 +55,26 @@ def repartir_cartas(cartas_iniciales,repeticiones):
     Returns:
       combinaciones: ej. {'repeticion1': ['contable', 'alguacil', 'asesino', 'cardenal', 'obispo']}
     """    
+
+    # 1. el error ha sido que cartal_aleatorias estaba vacia ya que en la linea cartas_aleatorias.remove(carta) que estaba dentro del for que se recorre 4 veces 0-5
+    # entonces la carta se remueve varias veces con cada repeticion
+    # 2. la solucion ha sido declarar carta fuera y cartas_aleatorias.remove(carta) dejar fuera del segundo for ya que como en remove estaba dentro del for
+    # la carta se removia con cada repeticion y al final no queda ninguna
+
+
     combinaciones={}
+    carta = ""
     for i in range(1,repeticiones+1):
         cartas_aleatorias = cartas_iniciales 
         combinaciones["repeticion"+str(i)]=[]
+
         for j in range(0,5):
             carta=random.choice(cartas_aleatorias)
             combinaciones["repeticion"+str(i)].append(carta)
-            cartas_aleatorias.remove(carta)
+        # esto fuera del segundo bucle
+        cartas_aleatorias.remove(carta)
 
     return combinaciones
+
 
     
