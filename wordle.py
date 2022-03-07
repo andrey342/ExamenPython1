@@ -56,7 +56,7 @@ def compare_words(word , secret):
     
     return same_position , same_letter
 
-def print_word():
+def print_word(word , same_letter_position , same_letter):
     """Dada una palabra, una lista same_position y otra lista same_letter, esta funciÃ³n crearÃ¡ un string donde aparezcan en mayÃºsculas las letras de la palabra que ocupen las posiciones de same_position, en minÃºsculas las letras de la palabra que ocupen las posiciones de same_letter y un guiÃ³n (-) en el resto de posiciones
     Args:
       word: Una palabra. Ej. "CAMPO"
@@ -65,6 +65,21 @@ def print_word():
     Returns:
       transformed: La palabra aplicando las transformaciones. En el caso anterior: "Cam--"
     """
+
+    transformed = word
+
+    for a in range(len(word)):
+        transformed += "-"
+
+    for i in same_letter_position:
+        transformed = word[i].upper()
+    for j in same_letter:
+        transformed = word[j].lower()
+    
+    print(transformed)
+
+
+
     
 def choose_secret_advanced():
     """Dado un nombre de fichero, esta funciÃ³n filtra solo las palabras de 5 letras que no tienen acentos (Ã¡,Ã©,Ã­,Ã³,Ãº). De estas palabras, la funciÃ³n devuelve una lista de 15 aleatorias no repetidas y una de estas 15, se selecciona aleatoriamente como palabra secret.
@@ -89,7 +104,7 @@ if __name__ == "__main__":
     for repeticiones in range(0,6):
         word = input("Introduce una nueva palabra: ")
         same_position, same_letter = compare_words(word , secret)
-        resultado=print_word()
+        resultado=print_word(word , same_position , same_letter)
         print(resultado)
         if word == secret:
             print("HAS GANADO!!")
